@@ -134,6 +134,7 @@ def calculator() -> None:
                 continue  # Prompt the user again
 
             # Attempt to execute the calculation
+            # **EAFP (Easier to Ask Forgiveness than Permission):** All the expected and unexpected errors will be caught
             try:
                 result = calculation.execute()
             except ZeroDivisionError:
