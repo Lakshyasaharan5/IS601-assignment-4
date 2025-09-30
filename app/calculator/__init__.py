@@ -44,6 +44,7 @@ Examples:
     subtract 15.5 3.2
     multiply 7 8
     divide 20 4
+    pow 2 3
     """
     print(help_message)
 
