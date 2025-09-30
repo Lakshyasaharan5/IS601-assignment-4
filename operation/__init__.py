@@ -46,3 +46,27 @@ class Operation:
         """
         return a + b  # Performs addition of two numbers and returns the result.
     
+    @staticmethod
+    def subtraction(a: float, b: float) -> float:
+        """
+        Subtracts the second floating-point number from the first and returns the result.
+
+        **Parameters:**
+        - `a (float)`: The number from which to subtract.
+        - `b (float)`: The number to subtract.
+        
+        **Returns:**
+        - `float`: The difference between `a` and `b`.
+
+        **Example:**
+        >>> Operation.subtraction(10.0, 4.0)
+        6.0
+
+        **Design Choice: Why Separate Functions for Each Operation?**
+        - By having separate functions, we make each operation clear and isolated, 
+          adhering to the **Single Responsibility Principle (SRP)**. Each function 
+          handles one specific task (addition, subtraction, etc.), making it easier 
+          to test and modify them independently.
+        """
+        return a - b  # Subtracts the second number from the first and returns the difference.
+    
