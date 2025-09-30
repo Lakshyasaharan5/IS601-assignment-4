@@ -127,6 +127,7 @@ class Operation:
           silently or crash, we handle the error gracefully, ensuring that any part of 
           the program using this function will be alerted to the issue.
         """
+        # **LBYL (Look Before You Leap):** Check before dividing.
         if b == 0:
             # Checks if the divisor is zero to prevent undefined division.
             raise ValueError("Division by zero is not allowed.")  # Raises an error if division by zero is attempted.
