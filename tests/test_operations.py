@@ -362,3 +362,113 @@ def test_operations_invalid_input_types(calc_method, a, b, expected_exception):
         calc_method(a, b)
 
 
+# -----------------------------------------------------------------------------------
+# Test Power Method
+# -----------------------------------------------------------------------------------
+
+def test_power_positive_exponent():
+    """
+    Test the power method with a positive exponent.
+    
+    This test verifies that raising a base to a positive exponent returns the correct result.
+    """
+    # Arrange
+    base = 2.0
+    exponent = 3.0
+    expected_result = 8.0
+
+    # Act
+    result = Operation.power(base, exponent)
+
+    # Assert
+    assert result == expected_result, f"Expected {base} ** {exponent} to be {expected_result}, got {result}"
+
+
+def test_power_zero_exponent():
+    """
+    Test the power method with zero as the exponent.
+    
+    This test verifies that any non-zero base raised to the power of zero returns 1.0.
+    """
+    # Arrange
+    base = 5.0
+    exponent = 0.0
+    expected_result = 1.0
+
+    # Act
+    result = Operation.power(base, exponent)
+
+    # Assert
+    assert result == expected_result, f"Expected {base} ** {exponent} to be {expected_result}, got {result}"
+
+
+def test_power_zero_base_positive_exponent():
+    """
+    Test the power method with zero as the base and a positive exponent.
+    
+    This test verifies that zero raised to any positive exponent returns 0.0.
+    """
+    # Arrange
+    base = 0.0
+    exponent = 5.0
+    expected_result = 0.0
+
+    # Act
+    result = Operation.power(base, exponent)
+
+    # Assert
+    assert result == expected_result, f"Expected {base} ** {exponent} to be {expected_result}, got {result}"
+
+
+def test_power_negative_exponent():
+    """
+    Test the power method with a negative exponent.
+    
+    This test verifies that raising a base to a negative exponent returns the correct reciprocal result.
+    """
+    # Arrange
+    base = 2.0
+    exponent = -2.0
+    expected_result = 0.25
+
+    # Act
+    result = Operation.power(base, exponent)
+
+    # Assert
+    assert result == expected_result, f"Expected {base} ** {exponent} to be {expected_result}, got {result}"
+
+
+def test_power_zero_base_zero_exponent():
+    """
+    Test the power method with both base and exponent as zero.
+    
+    This test verifies the behavior of 0 ** 0, which in Python returns 1.0.
+    """
+    # Arrange
+    base = 0.0
+    exponent = 0.0
+    expected_result = 1.0  # Python defines 0**0 as 1.0
+
+    # Act
+    result = Operation.power(base, exponent)
+
+    # Assert
+    assert result == expected_result, f"Expected {base} ** {exponent} to be {expected_result}, got {result}"
+
+
+@pytest.mark.parametrize("base, exponent, expected_exception", [
+    ('2', 3.0, TypeError),
+    (2.0, '3', TypeError),
+])
+def test_power_invalid_input_types(base, exponent, expected_exception):
+    """
+    Test the power method with invalid input types.
+    
+    This test verifies that providing non-float inputs raises a TypeError.
+    """
+    # Arrange
+    # Invalid inputs provided through parametrization
+
+    # Act & Assert
+    with pytest.raises(expected_exception):
+        Operation.power(base, exponent)

@@ -51,6 +51,7 @@ Examples:
     subtract 15.5 3.2
     multiply 7 8
     divide 20 4
+    pow 2 3
 """
     # Remove leading/trailing whitespace for comparison
     assert captured.out.strip() == expected_output.strip()
