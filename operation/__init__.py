@@ -70,3 +70,26 @@ class Operation:
         """
         return a - b  # Subtracts the second number from the first and returns the difference.
     
+    @staticmethod
+    def multiplication(a: float, b: float) -> float:
+        """
+        Multiplies two floating-point numbers and returns the product.
+
+        **Parameters:**
+        - `a (float)`: The first number to multiply.
+        - `b (float)`: The second number to multiply.
+        
+        **Returns:**
+        - `float`: The product of `a` and `b`.
+
+        **Example:**
+        >>> Operation.multiplication(2.0, 3.0)
+        6.0
+
+        **Advantages of Static Methods in Utility Classes:**
+        - Static methods in utility classes like this one provide simple access to functions 
+          without requiring an instance of the class. This reduces overhead and makes 
+          the methods easily reusable in other parts of the program.
+        """
+        return a * b  # Multiplies the two numbers and returns the product.
+    
