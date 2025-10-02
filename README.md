@@ -110,25 +110,43 @@ Calculation History:
 >> exit
 Exiting calculator. Goodbye!
 ```
-
-### Pytest test cases
+### Check 100% test coverage
 
 ```bash
-(venv) ➜  IS601-assignment-4 git:(main) ✗ pytest
+$pytest --cov=app tests/
 ========================================================= test session starts =========================================================
 platform darwin -- Python 3.13.3, pytest-8.3.3, pluggy-1.5.0
 rootdir: /Users/lakshyasaharan/projects/IS601/module-4/IS601-assignment-4
 plugins: cov-5.0.0, pylint-0.21.0
-collected 74 items                                                                                                                    
+collected 77 items                                                                                                                    
 
-tests/test_calculation.py .............................                                                                         [ 39%]
-tests/test_calculator.py .................                                                                                      [ 62%]
+tests/test_calculation.py ................................                                                                      [ 41%]
+tests/test_calculator.py .................                                                                                      [ 63%]
 tests/test_operations.py ............................                                                                           [100%]
 
-========================================================= 74 passed in 0.03s ==========================================================
-(venv) ➜  IS601-assignment-4 git:(main) ✗ 
+---------- coverage: platform darwin, python 3.13.3-final-0 ----------
+Name                          Stmts   Miss  Cover
+-------------------------------------------------
+app/calculation/__init__.py      55      0   100%
+app/calculator/__init__.py       65      0   100%
+app/operation/__init__.py        18      0   100%
+-------------------------------------------------
+TOTAL                           138      0   100%
 
 
+========================================================= 77 passed in 0.07s ==========================================================
+
+
+$coverage report --fail-under=100
+Name                          Stmts   Miss  Cover
+-------------------------------------------------
+app/calculation/__init__.py      55      0   100%
+app/calculator/__init__.py       65      0   100%
+app/operation/__init__.py        18      0   100%
+-------------------------------------------------
+TOTAL                           138      0   100%
+
+$pytest --cov=app --cov-report=html
 ```
 
 
