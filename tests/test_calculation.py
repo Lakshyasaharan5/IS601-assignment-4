@@ -16,10 +16,11 @@ from unittest.mock import patch
 from app.operation import Operation
 from app.calculation import (
     CalculationFactory,
+    PowCalculation,
     AddCalculation,
     SubtractCalculation,
     MultiplyCalculation,
-    DivideCalculation,
+    DivideCalculation,    
     Calculation
 )
 
@@ -71,6 +72,48 @@ def test_add_calculation_execute_negative(mock_addition):
 
     # Verify that the exception message is as expected
     assert str(exc_info.value) == "Addition error"
+
+@patch.object(Operation, 'power')
+def test_power_calculation_execute_positive(mock_power):
+    """
+    Test the execute method of PowerCalculation for a positive scenario.
+
+    This test verifies that the PowerCalculation class correctly calls the power
+    method of the Operation class with the provided operands and returns the expected result.
+    """
+    # Arrange
+    a = 2.0  # First operand
+    b = 3.0   # Second operand
+    expected_result = 8.0  # Expected result of power
+    mock_power.return_value = expected_result  # Mock the power method's return value
+    pow_calc = PowCalculation(a, b)  # Instantiate PowerCalculation with operands
+
+    # Act
+    result = pow_calc.execute()  # Execute the power calculation
+
+    # Assert
+    mock_power.assert_called_once_with(a, b)  # Ensure power was called with correct operands
+    assert result == expected_result  # Verify the result matches the expected value
+
+@patch.object(Operation, 'power')
+def test_power_calculation_execute_negative(mock_power):
+    """
+    Test the execute method of PowerCalculation for a negative scenario.
+
+    This test ensures that if the Operation.power method raises an exception,
+    the PowerCalculation.execute method propagates it correctly.
+    """
+    # Arrange
+    a = 2.0
+    b = 3.0
+    mock_power.side_effect = Exception("Power error")
+    power_calc = PowCalculation(a, b)
+
+    # Act & Assert
+    with pytest.raises(Exception) as exc_info:
+        power_calc.execute()
+
+    assert str(exc_info.value) == "Power error"
 
 
 @patch.object(Operation, 'subtraction')
@@ -251,6 +294,25 @@ def test_factory_creates_add_calculation():
     assert calc.a == a                        # Verify the first operand
     assert calc.b == b                        # Verify the second operand
 
+# def test_factory_creates_pow_calculation():
+#     """
+#     Test that CalculationFactory creates an AddCalculation instance.
+
+#     This test ensures that the factory correctly instantiates the AddCalculation
+#     class when the 'add' calculation type is requested.
+#     """
+#     # Arrange
+#     a = 10.0
+#     b = 5.0
+
+#     # Act
+#     calc = CalculationFactory.create_calculation('pow', a, b)
+
+#     # Assert
+#     assert isinstance(calc, PowCalculation)  # Check if the instance is of AddCalculation
+#     assert calc.a == a                        # Verify the first operand
+#     assert calc.b == b                        # Verify the second operand
+
 
 def test_factory_creates_subtract_calculation():
     """
@@ -420,6 +482,27 @@ def test_calculation_str_representation_multiplication(mock_multiplication):
     # Assert
     # Expected string should reflect the operation name derived from the class name ('Multiply')
     expected_str = f"{multiply_calc.__class__.__name__}: {a} Multiply {b} = 50.0"
+    assert calc_str == expected_str
+
+@patch.object(Operation, 'power', return_value=16.0)
+def test_calculation_str_representation_power(mock_power):
+    """
+    Test the __str__ method of PowCalculation.
+
+    This test verifies that the string representation of a PowCalculation instance
+    is formatted correctly, displaying the class name, operation, operands, and result.
+    """
+    # Arrange
+    a = 4.0
+    b = 2.0
+    pow_calc = PowCalculation(a, b)
+
+    # Act
+    calc_str = str(pow_calc)
+
+    # Assert
+    # Expected string should reflect the operation name derived from the class name ('Power')
+    expected_str = f"{pow_calc.__class__.__name__}: {a} Pow {b} = 16.0"
     assert calc_str == expected_str
 
 

@@ -153,7 +153,7 @@ class CalculationFactory:
         a specified calculation type.
 
         **Parameters:**
-        - `calculation_type (str)`: The type of calculation ('add', 'subtract', 'multiply', 'divide').
+        - `calculation_type (str)`: The type of calculation ('add', 'subtract', 'multiply', 'divide', 'pow').
         - `a (float)`: The first operand.
         - `b (float)`: The second operand.
         
@@ -181,7 +181,7 @@ class CalculationFactory:
 # -----------------------------------------------------------------------------------
 
 # Each of these classes defines a specific calculation type (addition, subtraction, 
-# multiplication, or division). These classes inherit from Calculation, implementing 
+# multiplication, division or power). These classes inherit from Calculation, implementing 
 # the `execute` method to perform the specific arithmetic operation. 
 
 @CalculationFactory.register_calculation('add')
@@ -247,9 +247,9 @@ class DivideCalculation(Calculation):
         return Operation.division(self.a, self.b)
 
 @CalculationFactory.register_calculation('pow')
-class PowerCalculation(Calculation):
+class PowCalculation(Calculation):
     """
-    PowerCalculation represents a power operation.
+    PowCalculation represents a power operation.
     
     By encapsulating the power logic here, we achieve a clear separation of 
     concerns, making it easy to adjust the power logic without affecting other calculations.
